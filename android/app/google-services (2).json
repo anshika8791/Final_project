@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "787693849749",
+    "project_id": "pgscout-2e46e",
+    "storage_bucket": "pgscout-2e46e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787693849749:android:83e7f96a7404dfb8de9f9c",
+        "android_client_info": {
+          "package_name": "com.example.my_final_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7HbDGrRaUm7Dm5E0L-sdAETAiRpELn-U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

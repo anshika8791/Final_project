@@ -9,17 +9,17 @@ TextField reusableTextField(String text, IconData icon, bool isPasswordType,
     autocorrect: !isPasswordType,
     cursorColor: Colors.white,
     style:
-    TextStyle(color: Colors.white.withOpacity(9)),
+    TextStyle(color: Colors.black.withOpacity(0.9)),
     decoration: InputDecoration(
       prefixIcon: Icon(
         icon,
-        color: Colors.white70,
+        color: Colors.black,
       ),
       labelText: text,
-      labelStyle: TextStyle(color: Colors.white.withOpacity(9)),
+      labelStyle: TextStyle(color: Colors.black.withOpacity(0.9)),
       filled: true,
       floatingLabelBehavior: FloatingLabelBehavior.never,
-      fillColor: Colors.white.withOpacity(9),
+      fillColor: Colors.white.withOpacity(0.9),
       border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide: const BorderSide(width: 0, style: BorderStyle.none)),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'color_utils.dart';
 import 'package:lottie/lottie.dart';
 import 'reusable_text_field.dart';
 import 'signup_screen.dart';
+import 'home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -14,6 +15,37 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
+
+  Future<void> login(String email, String password) async {
+    try {
+      // Sign in with email and password
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      print('User logged in: ${userCredential.user?.email}');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Login Successful')),
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } on FirebaseAuthException catch (e) {
+      String message = '';
+      if (e.code == 'user-not-found') {
+        message = 'No user found for that email.';
+      } else if (e.code == 'wrong-password') {
+        message = 'Wrong password provided.';
+      } else {
+        message = e.message ?? 'An error occurred.';
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(message)),
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +60,9 @@ class _SigninScreenState extends State<SigninScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(gradient: LinearGradient(colors: [
-          hexStringToColor("CB2893"),
-          hexStringToColor("9546C4"),
-          hexStringToColor("5E61F4"),
+          Color(0xffCB2893),
+          Color(0xff9546C4),
+          Color(0xff5E61F4),
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -52,9 +84,11 @@ class _SigninScreenState extends State<SigninScreen> {
             SizedBox(
               height: 20,
             ),
-            signInSignUpButton(context, true, () {}),
+            signInSignUpButton(context, true, () {
+            login(_emailTextController.text, _passwordTextController.text);
+            }),
             signUpOption()
-          ],
+            ],
         ),
       ),
     );
